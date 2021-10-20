@@ -1,0 +1,181 @@
+#pragma once
+#include "Server.h"
+#pragma comment(lib, "Ws2_32.lib")
+
+#pragma warning(disable:4996)
+
+
+Server::Server()
+{
+
+}
+
+Server::~Server()
+{
+	WSACleanup(); //清理winsock 运行环境
+}
+
+//初始化Winsock
+int Server::WinsockStartup() {
+	if (WinsockEnv::Startup() == -1) return -1;	//初始化Winsock
+	return 0;
+}
+
+//初始化Server，包括创建sockect，绑定到IP和PORT
+int Server::ServerStartup() {
+	//创建 TCP socket
+	this->listening_socket = socket(AF_INET, SOCK_STREAM, 0);
+	if (this->listening_socket == INVALID_SOCKET) {
+		cout << "Server socket creare error !\n";
+		WSACleanup();
+		return -1;
+	}
+	cout << "Server socket create ok!\n";
+
+	//设置服务器IP地址和端口号
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_port = htons(Config::PORT);
+	server_addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);//会自动找到服务器合适的IP地址
+//	server_addr.sin_addr.S_un.S_addr = inet_addr(Config::SERVERADDRESS.c_str()); //这是另外一种设置IP地址的方法
+
+	//绑定监听socket和server addr
+	int rtn = bind(this->listening_socket, (LPSOCKADDR) & (server_addr), sizeof(server_addr));
+	if (rtn == SOCKET_ERROR) {
+		cout << "Server socket bind error!\n";
+		closesocket(this->listening_socket);
+		WSACleanup();
+		return -1;
+	}
+
+	cout << "Server socket bind ok!\n";
+	return 0;
+}
+
+//开始监听,等待客户的连接请求
+int Server::ListenStartup() {
+	int rtn = listen(this->listening_socket, Config::MAX_CONNECTION);
+	if (rtn == SOCKET_ERROR) {
+		cout << "Server socket listen error!\n";
+		closesocket(this->listening_socket);
+		WSACleanup();
+		return -1;
+	}
+
+	cout << "Server socket listen ok!\n";
+	return 0;
+}
+
+string Server::getHeaderLine(string content_type, int content_length) {
+	static vector<string> header_line = {
+		"Connection: ",
+		"Date: ",
+		"Server: ",
+		"Last-Modified: ",
+		"Content-Length: ",
+		"Content-Type: "
+	};
+	string s = header_line[0] + string("close") + LF +
+		//header_line[1] + string("") + LF +
+		header_line[2] + string("Mozilla/5.0") + LF +
+		//header_line[3] + string("") + LF +
+		header_line[4] + to_string(content_length) + LF +
+		header_line[5] + content_type + LF + LF;
+	return s;
+}
+
+
+//接受客户端发来的请求和数据并转发
+int Server::Loop() {
+	u_long blockMode = Config::BLOCK_MODE;//将srvSock设为非阻塞模式以监听客户连接请求
+	int rtn;
+
+	if ((rtn = ioctlsocket(this->listening_socket, FIONBIO, &blockMode) == SOCKET_ERROR)) { //FIONBIO：允许或禁止套接口s的非阻塞模式。
+		cout << "ioctlsocket() failed with error!\n";
+		return -1;
+	}
+	cout << "ioctlsocket() for server socket ok! Waiting for client connection and data\n";
+
+	while (true) { //等待客户的连接请求
+
+		//Prepare the read and write socket sets for network I/O notification.
+		FD_ZERO(&this->rfds);
+		FD_ZERO(&this->wfds);
+
+		//把srvSocket加入到rfds，等待用户连接请求
+		FD_SET(this->listening_socket, &this->rfds);
+
+		//把当前的会话socket加入到rfds,等待用户数据的到来;加到wfds，等待socket可发送数据
+		for (list<SOCKET>::iterator itor = this->sessions->begin(); itor != this->sessions->end(); itor++) {
+			FD_SET(*itor, &rfds);
+			FD_SET(*itor, &wfds);
+		}
+
+		//等待用户连接请求或用户数据到来或会话socke可发送数据
+		if ((this->numOfSocketSignaled = select(0, &this->rfds, &this->wfds, NULL, NULL)) == SOCKET_ERROR) { //select函数返回有可读或可写的socket的总数，保存在rtn里.最后一个参数设定等待时间，如为NULL则为阻塞模式
+			cout << "select() failed with error!\n";
+			return -1;
+		}
+
+
+		//当程序运行到这里，意味着有用户连接请求到来，或有用户数据到来，或有会话socket可以发送数据
+
+		//首先检查是否有客户请求连接到来
+		if (this->AcceptRequestionFromClient() != 0) return -1;
+
+		//然后向客户端发送数据
+		this->ForwardMessage();
+
+		//最后接受客户端发来的数据
+		this->ReceieveMessageFromClients();
+
+		if (!this->rcvedMessages->empty()) {
+			const string& s = this->rcvedMessages->back();
+			cout << s << endl;
+			if (s.substr(0, 3) == "GET") {
+				string file_name;
+				int idx = 4;
+				while (s[idx] != ' ') {
+					file_name.push_back(s[idx]);
+					idx++;
+				}
+				cout << file_name << endl;
+				ifstream inFile(root + file_name, ios::in);
+				if (!inFile.is_open()) {
+					cout << "file not found error" << endl;
+				}
+				if (file_name.rfind(".jpg") == file_name.length() - 4) {
+					string buf;
+					string tmp;
+					while (inFile >> tmp) {
+						buf += tmp;
+					}
+					string header_line = getHeaderLine(string("image/jpeg"), buf.size());
+					string msg_to_send = status_line + header_line + buf;
+					cout << msg_to_send << endl;
+
+					this->rcvedMessages->clear();
+					this->rcvedMessages->insert(this->rcvedMessages->end(), msg_to_send);
+				}
+				else if (file_name.rfind(".html") == file_name.length() - 5) {
+					string buf;
+					string tmp;
+					while (inFile >> tmp) {
+						buf += tmp;
+					}
+					string header_line = getHeaderLine(string("text/html"), buf.size());
+					string msg_to_send = status_line + header_line + buf;
+					cout << msg_to_send << endl;
+
+					this->rcvedMessages->clear();
+					this->rcvedMessages->insert(this->rcvedMessages->end(), msg_to_send);
+				}
+				
+				
+
+			}
+		}
+
+	}
+
+	return 0;
+}
