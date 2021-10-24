@@ -1,0 +1,3 @@
+/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/build/CMakeFiles/rebuild_cache.dir
+/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/build/CMakeFiles/StopWait.dir
+/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/build/CMakeFiles/edit_cache.dir
