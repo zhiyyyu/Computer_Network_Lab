@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-bui
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -123,13 +123,66 @@ StopWait/fast:
 	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/build
 .PHONY : StopWait/fast
 
+#=============================================================================
+# Target rules for targets named SR
+
+# Build rule for target.
+SR: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 SR
+.PHONY : SR
+
+# fast build rule for target.
+SR/fast:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/build
+.PHONY : SR/fast
+
+#=============================================================================
+# Target rules for targets named GBN
+
+# Build rule for target.
+GBN: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 GBN
+.PHONY : GBN
+
+# fast build rule for target.
+GBN/fast:
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/build
+.PHONY : GBN/fast
+
+src/GBN.o: src/GBN.cpp.o
+
+.PHONY : src/GBN.o
+
+# target to build an object file
+src/GBN.cpp.o:
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBN.cpp.o
+.PHONY : src/GBN.cpp.o
+
+src/GBN.i: src/GBN.cpp.i
+
+.PHONY : src/GBN.i
+
+# target to preprocess a source file
+src/GBN.cpp.i:
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBN.cpp.i
+.PHONY : src/GBN.cpp.i
+
+src/GBN.s: src/GBN.cpp.s
+
+.PHONY : src/GBN.s
+
+# target to generate assembly for a file
+src/GBN.cpp.s:
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBN.cpp.s
+.PHONY : src/GBN.cpp.s
+
 src/GBNRdtReceiver.o: src/GBNRdtReceiver.cpp.o
 
 .PHONY : src/GBNRdtReceiver.o
 
 # target to build an object file
 src/GBNRdtReceiver.cpp.o:
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBNRdtReceiver.cpp.o
 .PHONY : src/GBNRdtReceiver.cpp.o
 
 src/GBNRdtReceiver.i: src/GBNRdtReceiver.cpp.i
@@ -138,7 +191,7 @@ src/GBNRdtReceiver.i: src/GBNRdtReceiver.cpp.i
 
 # target to preprocess a source file
 src/GBNRdtReceiver.cpp.i:
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.i
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBNRdtReceiver.cpp.i
 .PHONY : src/GBNRdtReceiver.cpp.i
 
 src/GBNRdtReceiver.s: src/GBNRdtReceiver.cpp.s
@@ -147,7 +200,7 @@ src/GBNRdtReceiver.s: src/GBNRdtReceiver.cpp.s
 
 # target to generate assembly for a file
 src/GBNRdtReceiver.cpp.s:
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.s
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBNRdtReceiver.cpp.s
 .PHONY : src/GBNRdtReceiver.cpp.s
 
 src/GBNRdtSender.o: src/GBNRdtSender.cpp.o
@@ -156,7 +209,7 @@ src/GBNRdtSender.o: src/GBNRdtSender.cpp.o
 
 # target to build an object file
 src/GBNRdtSender.cpp.o:
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBNRdtSender.cpp.o
 .PHONY : src/GBNRdtSender.cpp.o
 
 src/GBNRdtSender.i: src/GBNRdtSender.cpp.i
@@ -165,7 +218,7 @@ src/GBNRdtSender.i: src/GBNRdtSender.cpp.i
 
 # target to preprocess a source file
 src/GBNRdtSender.cpp.i:
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.i
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBNRdtSender.cpp.i
 .PHONY : src/GBNRdtSender.cpp.i
 
 src/GBNRdtSender.s: src/GBNRdtSender.cpp.s
@@ -174,8 +227,89 @@ src/GBNRdtSender.s: src/GBNRdtSender.cpp.s
 
 # target to generate assembly for a file
 src/GBNRdtSender.cpp.s:
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.s
+	$(MAKE) -f CMakeFiles/GBN.dir/build.make CMakeFiles/GBN.dir/src/GBNRdtSender.cpp.s
 .PHONY : src/GBNRdtSender.cpp.s
+
+src/SR.o: src/SR.cpp.o
+
+.PHONY : src/SR.o
+
+# target to build an object file
+src/SR.cpp.o:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SR.cpp.o
+.PHONY : src/SR.cpp.o
+
+src/SR.i: src/SR.cpp.i
+
+.PHONY : src/SR.i
+
+# target to preprocess a source file
+src/SR.cpp.i:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SR.cpp.i
+.PHONY : src/SR.cpp.i
+
+src/SR.s: src/SR.cpp.s
+
+.PHONY : src/SR.s
+
+# target to generate assembly for a file
+src/SR.cpp.s:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SR.cpp.s
+.PHONY : src/SR.cpp.s
+
+src/SRRdtReceiver.o: src/SRRdtReceiver.cpp.o
+
+.PHONY : src/SRRdtReceiver.o
+
+# target to build an object file
+src/SRRdtReceiver.cpp.o:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SRRdtReceiver.cpp.o
+.PHONY : src/SRRdtReceiver.cpp.o
+
+src/SRRdtReceiver.i: src/SRRdtReceiver.cpp.i
+
+.PHONY : src/SRRdtReceiver.i
+
+# target to preprocess a source file
+src/SRRdtReceiver.cpp.i:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SRRdtReceiver.cpp.i
+.PHONY : src/SRRdtReceiver.cpp.i
+
+src/SRRdtReceiver.s: src/SRRdtReceiver.cpp.s
+
+.PHONY : src/SRRdtReceiver.s
+
+# target to generate assembly for a file
+src/SRRdtReceiver.cpp.s:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SRRdtReceiver.cpp.s
+.PHONY : src/SRRdtReceiver.cpp.s
+
+src/SRRdtSender.o: src/SRRdtSender.cpp.o
+
+.PHONY : src/SRRdtSender.o
+
+# target to build an object file
+src/SRRdtSender.cpp.o:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SRRdtSender.cpp.o
+.PHONY : src/SRRdtSender.cpp.o
+
+src/SRRdtSender.i: src/SRRdtSender.cpp.i
+
+.PHONY : src/SRRdtSender.i
+
+# target to preprocess a source file
+src/SRRdtSender.cpp.i:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SRRdtSender.cpp.i
+.PHONY : src/SRRdtSender.cpp.i
+
+src/SRRdtSender.s: src/SRRdtSender.cpp.s
+
+.PHONY : src/SRRdtSender.s
+
+# target to generate assembly for a file
+src/SRRdtSender.cpp.s:
+	$(MAKE) -f CMakeFiles/SR.dir/build.make CMakeFiles/SR.dir/src/SRRdtSender.cpp.s
+.PHONY : src/SRRdtSender.cpp.s
 
 src/StopWait.o: src/StopWait.cpp.o
 
@@ -264,15 +398,29 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... StopWait"
 	@echo "... edit_cache"
+	@echo "... StopWait"
+	@echo "... rebuild_cache"
+	@echo "... SR"
+	@echo "... GBN"
+	@echo "... src/GBN.o"
+	@echo "... src/GBN.i"
+	@echo "... src/GBN.s"
 	@echo "... src/GBNRdtReceiver.o"
 	@echo "... src/GBNRdtReceiver.i"
 	@echo "... src/GBNRdtReceiver.s"
 	@echo "... src/GBNRdtSender.o"
 	@echo "... src/GBNRdtSender.i"
 	@echo "... src/GBNRdtSender.s"
+	@echo "... src/SR.o"
+	@echo "... src/SR.i"
+	@echo "... src/SR.s"
+	@echo "... src/SRRdtReceiver.o"
+	@echo "... src/SRRdtReceiver.i"
+	@echo "... src/SRRdtReceiver.s"
+	@echo "... src/SRRdtSender.o"
+	@echo "... src/SRRdtSender.i"
+	@echo "... src/SRRdtSender.s"
 	@echo "... src/StopWait.o"
 	@echo "... src/StopWait.i"
 	@echo "... src/StopWait.s"

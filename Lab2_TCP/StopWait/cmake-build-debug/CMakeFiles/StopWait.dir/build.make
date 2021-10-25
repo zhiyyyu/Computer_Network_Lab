@@ -129,61 +129,11 @@ CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o.provides: CMakeFiles/StopWai
 CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o.provides.build: CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o
 
 
-CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o: CMakeFiles/StopWait.dir/flags.make
-CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o: ../src/GBNRdtSender.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o -c /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtSender.cpp
-
-CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtSender.cpp > CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.i
-
-CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtSender.cpp -o CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.s
-
-CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.requires:
-
-.PHONY : CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.requires
-
-CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.provides: CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.requires
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.provides.build
-.PHONY : CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.provides
-
-CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.provides.build: CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o
-
-
-CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o: CMakeFiles/StopWait.dir/flags.make
-CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o: ../src/GBNRdtReceiver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o -c /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtReceiver.cpp
-
-CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtReceiver.cpp > CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.i
-
-CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtReceiver.cpp -o CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.s
-
-CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.requires:
-
-.PHONY : CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.requires
-
-CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.provides: CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.requires
-	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.provides.build
-.PHONY : CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.provides
-
-CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.provides.build: CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o
-
-
 # Object files for target StopWait
 StopWait_OBJECTS = \
 "CMakeFiles/StopWait.dir/src/StopWait.cpp.o" \
 "CMakeFiles/StopWait.dir/src/StopWaitRdtReceiver.cpp.o" \
-"CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o" \
-"CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o" \
-"CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o"
+"CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o"
 
 # External object files for target StopWait
 StopWait_EXTERNAL_OBJECTS =
@@ -191,11 +141,9 @@ StopWait_EXTERNAL_OBJECTS =
 ../bin/StopWait: CMakeFiles/StopWait.dir/src/StopWait.cpp.o
 ../bin/StopWait: CMakeFiles/StopWait.dir/src/StopWaitRdtReceiver.cpp.o
 ../bin/StopWait: CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o
-../bin/StopWait: CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o
-../bin/StopWait: CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o
 ../bin/StopWait: CMakeFiles/StopWait.dir/build.make
 ../bin/StopWait: CMakeFiles/StopWait.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ../bin/StopWait"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ../bin/StopWait"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/StopWait.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -206,8 +154,6 @@ CMakeFiles/StopWait.dir/build: ../bin/StopWait
 CMakeFiles/StopWait.dir/requires: CMakeFiles/StopWait.dir/src/StopWait.cpp.o.requires
 CMakeFiles/StopWait.dir/requires: CMakeFiles/StopWait.dir/src/StopWaitRdtReceiver.cpp.o.requires
 CMakeFiles/StopWait.dir/requires: CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o.requires
-CMakeFiles/StopWait.dir/requires: CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o.requires
-CMakeFiles/StopWait.dir/requires: CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o.requires
 
 .PHONY : CMakeFiles/StopWait.dir/requires
 

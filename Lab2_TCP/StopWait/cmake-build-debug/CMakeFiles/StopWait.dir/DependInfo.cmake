@@ -4,8 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtReceiver.cpp" "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles/StopWait.dir/src/GBNRdtReceiver.cpp.o"
-  "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtSender.cpp" "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles/StopWait.dir/src/GBNRdtSender.cpp.o"
   "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/StopWait.cpp" "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles/StopWait.dir/src/StopWait.cpp.o"
   "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/StopWaitRdtReceiver.cpp" "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles/StopWait.dir/src/StopWaitRdtReceiver.cpp.o"
   "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/StopWaitRdtSender.cpp" "/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.o"

@@ -17,11 +17,11 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="rebuild_cache">
+			<Target title="edit_cache">
 				<Option working_dir="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -75,22 +75,130 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="edit_cache">
+			<Target title="rebuild_cache">
 				<Option working_dir="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SR">
+				<Option output="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin/SR" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 SR"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SR/fast">
+				<Option output="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin/SR" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 SR/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GBN">
+				<Option output="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin/GBN" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 GBN"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="GBN/fast">
+				<Option output="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin/GBN" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 GBN/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBN.cpp">
+			<Option target="GBN"/>
+		</Unit>
 		<Unit filename="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtReceiver.cpp">
-			<Option target="StopWait"/>
+			<Option target="GBN"/>
 		</Unit>
 		<Unit filename="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/GBNRdtSender.cpp">
-			<Option target="StopWait"/>
+			<Option target="GBN"/>
+		</Unit>
+		<Unit filename="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/SR.cpp">
+			<Option target="SR"/>
+		</Unit>
+		<Unit filename="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/SRRdtReceiver.cpp">
+			<Option target="SR"/>
+		</Unit>
+		<Unit filename="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/SRRdtSender.cpp">
+			<Option target="SR"/>
 		</Unit>
 		<Unit filename="/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/StopWait.cpp">
 			<Option target="StopWait"/>

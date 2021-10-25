@@ -33,9 +33,9 @@ bool StopWaitRdtSender::send(const Message &message) {
 	this->packetWaitingAck.checksum = pUtils->calculateCheckSum(this->packetWaitingAck);
 	pUtils->printPacket("发送方发送报文", this->packetWaitingAck);
 	pns->startTimer(SENDER, Configuration::TIME_OUT,this->packetWaitingAck.seqnum);			//启动发送方定时器
-	pns->sendToNetworkLayer(RECEIVER, this->packetWaitingAck);								//调用模拟网络环境的sendToNetworkLayer，通过网络层发送到对方
+	pns->sendToNetworkLayer(RECEIVER, this->packetWaitingAck);							//调用模拟网络环境的sendToNetworkLayer，通过网络层发送到对方
 
-	this->waitingState = true;																					//进入等待状态
+	this->waitingState = true;																		//进入等待状态
 	return true;
 }
 
@@ -55,8 +55,7 @@ void StopWaitRdtSender::receive(const Packet &ackPkt) {
 			pUtils->printPacket("发送方没有正确收到确认，重发上次发送的报文", this->packetWaitingAck);
 			pns->stopTimer(SENDER, this->packetWaitingAck.seqnum);									//首先关闭定时器
 			pns->startTimer(SENDER, Configuration::TIME_OUT, this->packetWaitingAck.seqnum);			//重新启动发送方定时器
-			pns->sendToNetworkLayer(RECEIVER, this->packetWaitingAck);								//重新发送数据包
-
+			pns->sendToNetworkLayer(RECEIVER, this->packetWaitingAck);							//重新发送数据包
 		}
 	}	
 }
