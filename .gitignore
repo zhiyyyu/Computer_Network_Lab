@@ -1,3 +1,7 @@
+# VS2019
+.vs
+out
+
 # clion
 cmake-build-debug
 
