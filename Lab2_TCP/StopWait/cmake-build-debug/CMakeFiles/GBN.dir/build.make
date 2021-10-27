@@ -142,6 +142,7 @@ GBN_EXTERNAL_OBJECTS =
 ../bin/GBN: CMakeFiles/GBN.dir/src/GBNRdtSender.cpp.o
 ../bin/GBN: CMakeFiles/GBN.dir/src/GBNRdtReceiver.cpp.o
 ../bin/GBN: CMakeFiles/GBN.dir/build.make
+../bin/GBN: ../lib/libnetsim.a
 ../bin/GBN: CMakeFiles/GBN.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ../bin/GBN"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/GBN.dir/link.txt --verbose=$(VERBOSE)

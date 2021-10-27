@@ -28,12 +28,14 @@ add_executable(SR
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
+find_library(NETSIM_LIB libnetsim.a ${PROJECT_SOURCE_DIR}/lib)
+
 target_link_libraries(StopWait
         -lnetsim
         )
 
 target_link_libraries(GBN
-        -lnetsim
+        ${NETSIM_LIB}
         )
 
 target_link_libraries(SR

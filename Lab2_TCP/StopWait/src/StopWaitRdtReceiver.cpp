@@ -6,10 +6,9 @@
 StopWaitRdtReceiver::StopWaitRdtReceiver():expectSequenceNumberRcvd(0)
 {
 	lastAckPkt.acknum = -1; //初始状态下，上次发送的确认包的确认序号为-1，使得当第一个接受的数据包出错时该确认报文的确认号为-1
-	lastAckPkt.checksum = 0;
 	lastAckPkt.seqnum = -1;	//忽略该字段
-	for(int i = 0; i < Configuration::PAYLOAD_SIZE;i++){
-		lastAckPkt.payload[i] = '.';
+	for(char & i : lastAckPkt.payload){
+		i = '.';
 	}
 	lastAckPkt.checksum = pUtils->calculateCheckSum(lastAckPkt);
 }
@@ -17,6 +16,7 @@ StopWaitRdtReceiver::StopWaitRdtReceiver():expectSequenceNumberRcvd(0)
 
 StopWaitRdtReceiver::~StopWaitRdtReceiver()
 {
+
 }
 
 void StopWaitRdtReceiver::receive(const Packet &packet) {

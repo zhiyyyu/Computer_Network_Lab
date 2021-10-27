@@ -1,36 +1,30 @@
-
 #include "StopWaitRdtSender.h"
-
 
 StopWaitRdtSender::StopWaitRdtSender():expectSequenceNumberSend(0),waitingState(false)
 {
 
 }
 
-
 StopWaitRdtSender::~StopWaitRdtSender()
 {
+
 }
-
-
 
 bool StopWaitRdtSender::getWaitingState() {
 	return waitingState;
 }
 
-
-
-
 bool StopWaitRdtSender::send(const Message &message) {
-	if (this->waitingState) { //发送方处于等待确认状态
+    //发送方处于等待确认状态
+	if (this->waitingState) {
 		return false;
 	}
-
+    // message -> package
 	this->packetWaitingAck.acknum = -1; //该字段
 	this->packetWaitingAck.seqnum = this->expectSequenceNumberSend;
-	this->packetWaitingAck.checksum = 0;
 	memcpy(packetWaitingAck.payload, message.data, sizeof(message.data));
 	this->packetWaitingAck.checksum = pUtils->calculateCheckSum(this->packetWaitingAck);
+
 	pUtils->printPacket("发送方发送报文", this->packetWaitingAck);
 	pns->startTimer(SENDER, Configuration::TIME_OUT,this->packetWaitingAck.seqnum);			//启动发送方定时器
 	pns->sendToNetworkLayer(RECEIVER, this->packetWaitingAck);							//调用模拟网络环境的sendToNetworkLayer，通过网络层发送到对方

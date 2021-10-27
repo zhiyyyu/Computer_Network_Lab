@@ -47,6 +47,8 @@ RdtReceiver.h
 ../include/StopWaitRdtSender.h
 RdtSender.h
 ../include/RdtSender.h
+Global.h
+../include/Global.h
 
 ../include/Tool.h
 DataStructure.h
@@ -71,8 +73,6 @@ StopWaitRdtReceiver.h
 /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/StopWaitRdtReceiver.h
 
 /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/StopWaitRdtSender.cpp
-Global.h
-/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/Global.h
 StopWaitRdtSender.h
 /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/src/StopWaitRdtSender.h
 
