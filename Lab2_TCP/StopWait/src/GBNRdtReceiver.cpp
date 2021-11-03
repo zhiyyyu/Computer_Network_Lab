@@ -5,9 +5,9 @@
 #include "GBNRdtReciever.h"
 
 GBNRdtReceiver::GBNRdtReceiver() {
-    expected_seqnum = 0;
+    expected_seqnum = 1;
     last_ack_pkt.acknum = 0;
-    last_ack_pkt.seqnum = -1;
+    last_ack_pkt.seqnum = 0;
     for(auto & i: last_ack_pkt.payload) i = '.';
     last_ack_pkt.checksum = pUtils->calculateCheckSum(last_ack_pkt);
 }

@@ -7,8 +7,8 @@
 using namespace dzh;
 
 GBNRdtSender::GBNRdtSender() {
-    window_base = 0;
-    next_seqnum_to_send = 0;
+    window_base = 1;
+    next_seqnum_to_send = 1;
     waiting_state = false;
     window_idx = 0;
 }
@@ -21,6 +21,16 @@ bool GBNRdtSender::getWaitingState() {
     return this->waiting_state;
 }
 
+Packet GBNRdtSender::make_pkt(int nextseqnum, const Message &message) {
+    Packet packet;
+    packet.acknum = -1;
+    packet.seqnum = nextseqnum;
+    packet.checksum = 0;
+    memcpy(packet.payload, message.data, sizeof(message.data));
+    packet.checksum = pUtils->calculateCheckSum(packet);
+    return packet;
+}
+
 /**
  * get data from app layer, send to net layer
  * @param message
@@ -30,21 +40,17 @@ bool GBNRdtSender::send(const Message &message) {
     // window is not full
     if(next_seqnum_to_send < window_base + WIN_LENGTH){
         // make packet
-        window[window_idx].acknum = -1;
-        window[window_idx].seqnum = next_seqnum_to_send;
-        memcpy(window[window_idx].payload, message.data, sizeof(message.data));
-        window[window_idx].checksum = pUtils->calculateCheckSum(window[window_idx]);
+        window[window_idx] = make_pkt(next_seqnum_to_send, message);
         // send packet
         pUtils->printPacket("发送方发送报文", window[window_idx]);
+        pns->sendToNetworkLayer(RECEIVER, window[window_idx]);
         if(window_base == next_seqnum_to_send){
             pns->startTimer(SENDER, Configuration::TIME_OUT, window[window_idx].seqnum);
         }
-        pns->sendToNetworkLayer(RECEIVER, window[window_idx]);
-
-        if(++window_idx >= WIN_LENGTH){
+        window_idx++;
+        if(window_idx >= WIN_LENGTH){
             waiting_state = true;
         }
-//        window_idx++;
         next_seqnum_to_send++;
         return true;
     } else{ // failed to send, window is full , waiting for the ack
@@ -59,40 +65,41 @@ bool GBNRdtSender::send(const Message &message) {
  */
 void GBNRdtSender::receive(const Packet &ackPkt) {
     // seqnum > base
-    if(window_idx > 0){
+//    if(window_idx > 0){
         // do rdt check
-        int checksum = pUtils->calculateCheckSum(ackPkt);
-//        cout << ackPkt.checksum << " " << checksum << endl;
-//        cout << ackPkt.acknum << " " << window_base << endl;
+        checksum = pUtils->calculateCheckSum(ackPkt);
         if(checksum == ackPkt.checksum && ackPkt.acknum >= window_base){    // >= !!!
             int forward_num = ackPkt.acknum - window_base + 1;
             // reset base
             window_base = ackPkt.acknum + 1;
             // all pkt are acked
             if(window_base == next_seqnum_to_send){
-                pUtils->printPacket("发送方正确收到确认", ackPkt);
-                pns->stopTimer(SENDER, ackPkt.acknum);
+                pUtils->printPacket("发送方正确收到确认", this->window[0]);
+                pns->stopTimer(SENDER, this->window[0].seqnum);
             } else{
-                pUtils->printPacket("发送方没有正确收到确认，重发上次发送的报文", this->window[window_idx]);
-                pns->stopTimer(SENDER, ackPkt.acknum);
-                pns->startTimer(SENDER, Configuration::TIME_OUT, this->window[window_idx].seqnum);
-                pns->sendToNetworkLayer(RECEIVER, this->window[window_idx]);							//重新发送数据包
+                pUtils->printPacket("发送方没有正确收到确认，重发上次发送的报文", this->window[0]);
+                pns->stopTimer(SENDER, this->window[0].seqnum);
+                pns->startTimer(SENDER, Configuration::TIME_OUT, this->window[forward_num].seqnum);
+//                pns->sendToNetworkLayer(RECEIVER, this->window[window_idx]);							//重新发送数据包
             }
 
             for(int i=forward_num;i<=window_idx;i++){
                 window[i-forward_num] = window[i];
             }
+            // reset idx
             window_idx -= forward_num;
             waiting_state = false;
         }
-    }
+//    }
 }
 
 void GBNRdtSender::timeoutHandler(int seqNum) {
+    pUtils->printPacket("发送方定时器时间到，重发上次发送的报文", this->window[0]);
     // restart timer
-    pns->startTimer(SENDER, Configuration::TIME_OUT, seqNum);
+    pns->stopTimer(SENDER, window[0].seqnum);
+    pns->startTimer(SENDER, Configuration::TIME_OUT, window[0].seqnum);
     // resend
-    for(int i=window_base;i<next_seqnum_to_send;i++){
+    for(int i=0;i<window_idx;i++){
         pns->sendToNetworkLayer(RECEIVER, window[i]);
     }
 }

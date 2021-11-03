@@ -17,8 +17,11 @@ namespace dzh{
         int window_base;                // idx of first package in cur window
         int window_idx;                 // idx of cur package in window
         int next_seqnum_to_send;	        // idx of next package to send
+        int checksum;
         bool waiting_state;				// send window full ?
         Packet window[WIN_LENGTH];
+
+        static inline Packet make_pkt(int nextseqnum, const Message &message);
 
     public:
 
