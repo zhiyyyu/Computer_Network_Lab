@@ -4,7 +4,7 @@
 # outputname 输出文件名
 # resultname 程序控制台输出结果重定向文件名
 
-appname='stop_wait'
+appname='StopWait'
 inputname='input.txt'
 outputname='output.txt'
 resultname='result.txt'

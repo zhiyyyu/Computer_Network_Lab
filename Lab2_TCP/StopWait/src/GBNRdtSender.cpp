@@ -80,7 +80,6 @@ void GBNRdtSender::receive(const Packet &ackPkt) {
                 pUtils->printPacket("发送方没有正确收到确认，重发上次发送的报文", this->window[0]);
                 pns->stopTimer(SENDER, this->window[0].seqnum);
                 pns->startTimer(SENDER, Configuration::TIME_OUT, this->window[forward_num].seqnum);
-//                pns->sendToNetworkLayer(RECEIVER, this->window[window_idx]);							//重新发送数据包
             }
 
             for(int i=forward_num;i<=window_idx;i++){

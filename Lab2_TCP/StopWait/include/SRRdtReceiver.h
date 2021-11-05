@@ -6,12 +6,18 @@
 #define STOPWAIT_SRRDTRECEIVER_H
 
 #include "RdtReceiver.h"
+#include "Global.h"
 
 namespace dzh{
     class SRRdtReceiver:public RdtReceiver{
     private:
+        static constexpr int WIN_LENGTH = 8;
         int expected_seqnum;	// 期待收到的下一个报文序号
-        Packet last_ack_pkt;	//上次发送的确认报文
+        bool is_cached[WIN_LENGTH];
+        Packet window[WIN_LENGTH];
+        int recv_base;
+        int window_idx;
+        int checksum;
 
     public:
         SRRdtReceiver();

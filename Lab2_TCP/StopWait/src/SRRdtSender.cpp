@@ -4,26 +4,85 @@
 
 #include "SRRdtSender.h"
 
-dzh::SRRdtSender::SRRdtSender() {
+using namespace dzh;
+
+SRRdtSender::SRRdtSender() {
+    this->waiting_state = false;
+    this->next_seqnum_to_send = 1;
+    this->window_idx = 0;
+    this->window_base = 1;
 
 }
 
-dzh::SRRdtSender::~SRRdtSender() {
+SRRdtSender::~SRRdtSender() {
 
 }
 
-bool dzh::SRRdtSender::getWaitingState() {
-    return false;
+bool SRRdtSender::getWaitingState() {
+    return waiting_state;
 }
 
-bool dzh::SRRdtSender::send(const Message &message) {
-    return false;
+Packet SRRdtSender::make_pkt(int nextseqnum, const Message &message) {
+    Packet packet;
+    packet.acknum = -1;
+    packet.seqnum = nextseqnum;
+    packet.checksum = 0;
+    memcpy(packet.payload, message.data, sizeof(message.data));
+    packet.checksum = pUtils->calculateCheckSum(packet);
+    return packet;
 }
 
-void dzh::SRRdtSender::receive(const Packet &ackPkt) {
+bool SRRdtSender::send(const Message &message) {
+    if(getWaitingState()){
+        return false;
+    }
+    if(next_seqnum_to_send < window_base + WIN_LENGTH){
+        // make packet
+        window[window_idx] = make_pkt(next_seqnum_to_send, message);
+        // send packet
+        pUtils->printPacket("发送方发送报文", window[window_idx]);
+        pns->sendToNetworkLayer(RECEIVER, window[window_idx]);
+        pns->startTimer(SENDER, Configuration::TIME_OUT, window[window_idx].seqnum);
 
+        window_idx++;
+        if(window_idx == WIN_LENGTH){
+            waiting_state = true;
+            return true;
+        }
+        next_seqnum_to_send++;
+        waiting_state = false;
+        return true;
+    } else{
+        waiting_state = true;
+        return false;
+    }
 }
 
-void dzh::SRRdtSender::timeoutHandler(int seqNum) {
+void SRRdtSender::receive(const Packet &ackPkt) {
+    checksum = pUtils->calculateCheckSum(ackPkt);
+    if(checksum == ackPkt.checksum && ackPkt.acknum - window_base < WIN_LENGTH){
+        is_ack[ackPkt.acknum-window_base] = true;
+        // base has acked
+        if(ackPkt.acknum == window_base){
+            int idx = 0;
+            while(is_ack[idx]) idx++;
+            idx++;
+            for(int i=0;i<WIN_LENGTH;i++){
+                window[i] = window[i+idx];
+                is_ack[i] = i < window_idx ? is_ack[i+idx] : false;
+            }
+            window_idx -= idx;
+            window_base += idx;
+        }
+    } else{
 
+    }
+}
+
+void SRRdtSender::timeoutHandler(int seqNum) {
+    int idx = 0;
+    while(window[idx].seqnum != seqNum) idx++;
+    pns->stopTimer(SENDER, seqNum);
+    pns->startTimer(SENDER, Configuration::TIME_OUT, seqNum);
+    pns->sendToNetworkLayer(RECEIVER, window[idx]);
 }

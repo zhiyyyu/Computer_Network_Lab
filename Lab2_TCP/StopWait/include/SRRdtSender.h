@@ -6,6 +6,7 @@
 #define STOPWAIT_SRRDTSENDER_H
 
 #include "RdtSender.h"
+#include "Global.h"
 
 namespace dzh{
     class SRRdtSender:public RdtSender{
@@ -13,9 +14,13 @@ namespace dzh{
         static constexpr int WIN_LENGTH = 8;    // window size
         int window_base;                // idx of first package in cur window
         int window_idx;                 // idx of cur package in window
+        int checksum;
+        bool is_ack[WIN_LENGTH];
         int next_seqnum_to_send;	        // idx of next package to send
         bool waiting_state;				// send window full ?
         Packet window[WIN_LENGTH];
+
+        static inline Packet make_pkt(int nextseqnum, const Message &message);
 
     public:
 
@@ -27,7 +32,6 @@ namespace dzh{
     public:
         SRRdtSender();
         virtual ~SRRdtSender();
-    };
     };
 }
 
