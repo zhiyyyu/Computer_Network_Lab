@@ -54,7 +54,9 @@ void SRRdtReceiver::receive(const Packet &packet) {
             pns->sendToNetworkLayer(SENDER, ack_pkt);	//调用模拟网络环境的sendToNetworkLayer，通过网络层发送确认报文到对方
         }
     } else{
-        pUtils->printPacket("接收方没有正确收到发送方的报文,数据校验错误", packet);
+        ack_pkt.acknum = packet.seqnum; //确认序号等于收到的报文序号
+        ack_pkt.checksum = pUtils->calculateCheckSum(ack_pkt);
+        pUtils->printPacket("接收方没有正确收到发送方的报文,数据校验错误", ack_pkt);
 //        pUtils->printPacket("接收方重新发送上次的确认报文", ack_pkt);
 //        pns->sendToNetworkLayer(SENDER, ack_pkt);	//调用模拟网络环境的sendToNetworkLayer，通过网络层发送上次的确认报文
     }
