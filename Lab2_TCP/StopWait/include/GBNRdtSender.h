@@ -13,7 +13,7 @@
 namespace dzh{
     class GBNRdtSender:public RdtSender{
     private:
-        static constexpr int WIN_LENGTH = 8;    // window size
+        static constexpr int WIN_LENGTH = 4;    // window size
         int window_base;                // idx of first package in cur window
         int window_idx;                 // idx of cur package in window
         int next_seqnum_to_send;	        // idx of next package to send

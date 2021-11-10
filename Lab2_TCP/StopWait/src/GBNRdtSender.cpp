@@ -81,9 +81,20 @@ void GBNRdtSender::receive(const Packet &ackPkt) {
                 pns->stopTimer(SENDER, this->window[0].seqnum);
                 pns->startTimer(SENDER, Configuration::TIME_OUT, this->window[forward_num].seqnum);
             }
-
+            for(const auto & i : window){
+                pUtils->printPacket("SEND（0）窗口内容：",i);
+            }
             for(int i=forward_num;i<=window_idx;i++){
                 window[i-forward_num] = window[i];
+            }
+//            for(int i=0;i<=window_idx-forward_num;i++){
+//                window[i] = window[i+forward_num];
+//            }
+            for(int i=window_idx-forward_num+1;i<WIN_LENGTH;i++){
+                for(auto & p: window[i].payload) p = '.';
+            }
+            for(const auto & i : window){
+                pUtils->printPacket("SEND（1）窗口内容：",i);
             }
             // reset idx
             window_idx -= forward_num;

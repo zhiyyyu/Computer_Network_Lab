@@ -12,7 +12,6 @@ TCPRdtSender::TCPRdtSender() {
     waiting_state = false;
     window_idx = 0;
     resend_cnt = 0;
-//    last_ack = -1;
 }
 
 TCPRdtSender::~TCPRdtSender() noexcept {
@@ -72,23 +71,38 @@ void TCPRdtSender::receive(const Packet &ackPkt) {
     checksum = pUtils->calculateCheckSum(ackPkt);
     if(checksum == ackPkt.checksum && ackPkt.acknum >= window_base){    // >= !!!
         int forward_num = ackPkt.acknum - window_base + 1;
+//        int forward_num = ackPkt.acknum - window_base;
         // reset base
         window_base = ackPkt.acknum + 1;
-        if(window[0].seqnum == ackPkt.acknum){
+//        if(last_ack_pkt.seqnum == ackPkt.acknum){
+//            resend_cnt++;
+//            if(resend_cnt == 3){
+//                pns->stopTimer(SENDER, last_ack_pkt.seqnum);
+//                pns->sendToNetworkLayer(RECEIVER,last_ack_pkt);//将第一个报文发送给接收方
+//                pUtils->printPacket("冗余ACK*3，快速重传当前窗口第一个报文",last_ack_pkt);
+//                pns->startTimer(SENDER,Configuration::TIME_OUT, last_ack_pkt.seqnum);
+//                printf("冗余ACK%d *3",ackPkt.acknum);
+//                resend_cnt = 0;
+//                return;
+//            }
+//        } else{
+//            resend_cnt = 0;
+//        }
+        if(last_ack_pkt.seqnum == ackPkt.acknum){
             resend_cnt++;
             if(resend_cnt == 3){
-                pns->stopTimer(SENDER,this->window[0].seqnum);
-                pns->sendToNetworkLayer(RECEIVER,this->window[0]);//将第一个报文发送给接收方
-                pUtils->printPacket("\n冗余ACK*4，快速重传当前窗口第一个报文",window[0]);
-                pns->startTimer(SENDER,Configuration::TIME_OUT,this->window[0].seqnum);
-                printf("\n冗余ACK%d *4 \n",ackPkt.acknum);
+                pns->stopTimer(SENDER, last_ack_pkt.seqnum);
+                pns->sendToNetworkLayer(RECEIVER,last_ack_pkt);//将第一个报文发送给接收方
+                pUtils->printPacket("冗余ACK*3，快速重传当前窗口第一个报文",last_ack_pkt);
+                pns->startTimer(SENDER,Configuration::TIME_OUT, last_ack_pkt.seqnum);
+                printf("冗余ACK%d *3",ackPkt.acknum);
                 resend_cnt = 0;
                 return;
             }
         } else{
             resend_cnt = 0;
         }
-//        last_ack = ackPkt.acknum;
+        last_ack_pkt = ackPkt;
         // all pkt are acked
         if(window_base == next_seqnum_to_send){
             pUtils->printPacket("发送方正确收到确认", this->window[0]);
@@ -98,9 +112,18 @@ void TCPRdtSender::receive(const Packet &ackPkt) {
             pns->stopTimer(SENDER, this->window[0].seqnum);
             pns->startTimer(SENDER, Configuration::TIME_OUT, this->window[forward_num].seqnum);
         }
+        for(const auto & i : window){
+            pUtils->printPacket("SEND（0）窗口内容：",i);
+        }
         // sliding
-        for(int i=forward_num;i<=window_idx;i++){
+        for(int i=forward_num;i<=window_idx && i < WIN_LENGTH;i++){
             window[i-forward_num] = window[i];
+        }
+//        for(int i=window_idx-forward_num+1;i<WIN_LENGTH;i++){
+//            for(auto & p: window[i].payload) p = '.';
+//        }
+        for(const auto & i : window){
+            pUtils->printPacket("SEND（1）窗口内容：",i);
         }
         // reset idx
         window_idx -= forward_num;

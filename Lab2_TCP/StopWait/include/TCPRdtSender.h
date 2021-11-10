@@ -16,15 +16,15 @@
 namespace dzh{
     class TCPRdtSender:public RdtSender{
     private:
-        static constexpr int WIN_LENGTH = 8;    // window size
+        static constexpr int WIN_LENGTH = 4;    // window size
         int window_base;                // idx of first package in cur window
         int window_idx;                 // idx of cur package in window
         int next_seqnum_to_send;	        // idx of next package to send
         int checksum;
         int resend_cnt;
-        int last_ack;
         bool waiting_state;				// send window full ?
         Packet window[WIN_LENGTH];
+        Packet last_ack_pkt;
 
         static inline Packet make_pkt(int nextseqnum, const Message &message);
 

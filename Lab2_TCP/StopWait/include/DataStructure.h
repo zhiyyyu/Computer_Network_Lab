@@ -6,7 +6,7 @@ struct  Configuration{
 	/**
 	定义各层协议Payload数据的大小（字节为单位）
 	*/
-	static const int PAYLOAD_SIZE = 21;
+	static const int PAYLOAD_SIZE = 22;
 
 	/**
 	定时器时间

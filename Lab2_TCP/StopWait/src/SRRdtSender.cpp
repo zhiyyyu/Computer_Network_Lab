@@ -45,11 +45,11 @@ bool SRRdtSender::send(const Message &message) {
         pns->startTimer(SENDER, Configuration::TIME_OUT, window[window_idx].seqnum);
 
         window_idx++;
+        next_seqnum_to_send++;
         if(window_idx == WIN_LENGTH){
             waiting_state = true;
             return true;
         }
-        next_seqnum_to_send++;
         waiting_state = false;
         return true;
     } else{
@@ -69,14 +69,24 @@ void SRRdtSender::receive(const Packet &ackPkt) {
                 pUtils->printPacket("收到base的ACK", ackPkt);
 //            pns->stopTimer(SENDER, ackPkt.acknum);
                 int idx = 0;
-                while(is_ack[idx]) idx++;
+                while(idx < WIN_LENGTH && is_ack[idx]) idx++;
+
+                for(const auto & i : window){
+                    pUtils->printPacket("SEND（0）窗口内容：",i);
+                }
+
                 for(int i=0;i<WIN_LENGTH-idx && i<window_idx;i++){
-                    window[i] = window[i+idx];
+                    window[i] = window[i + idx];
                     is_ack[i] = is_ack[i + idx];
                 }
-                for(int i=WIN_LENGTH-idx;i<window_idx;i++){
+                for(int i=WIN_LENGTH-idx;i<WIN_LENGTH;i++){
+                    for(auto & p: window[i].payload) p = '.';
                     is_ack[i] = false;
                 }
+                for(const auto & i : window){
+                    pUtils->printPacket("SEND（1）窗口内容：",i);
+                }
+
                 window_idx -= idx;
                 window_base += idx;
                 waiting_state = false;
@@ -95,7 +105,8 @@ void SRRdtSender::receive(const Packet &ackPkt) {
 
 void SRRdtSender::timeoutHandler(int seqNum) {
     int idx = 0;
-    while(window[idx].seqnum != seqNum) idx++;
+    while(idx <= window_idx && window[idx].seqnum != seqNum) idx++;
+//    if(idx == window_idx + 1) return;
     pns->stopTimer(SENDER, seqNum);
     pns->startTimer(SENDER, Configuration::TIME_OUT, seqNum);
     pns->sendToNetworkLayer(RECEIVER, window[idx]);

@@ -16,7 +16,7 @@ using namespace std;
 namespace dzh{
     class SRRdtReceiver:public RdtReceiver{
     private:
-        static constexpr int WIN_LENGTH = 8;
+        static constexpr int WIN_LENGTH = 4;
         int expected_seqnum;	// 期待收到的下一个报文序号
         vector<int> is_cached;
         Packet ack_pkt;
