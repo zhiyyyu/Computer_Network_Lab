@@ -8,12 +8,18 @@
 #include "RdtReceiver.h"
 #include "Global.h"
 
+#include <numeric>
+#include <vector>
+
+using namespace std;
+
 namespace dzh{
     class SRRdtReceiver:public RdtReceiver{
     private:
         static constexpr int WIN_LENGTH = 8;
         int expected_seqnum;	// 期待收到的下一个报文序号
-        bool is_cached[WIN_LENGTH];
+        vector<int> is_cached;
+        Packet ack_pkt;
         Packet window[WIN_LENGTH];
         int recv_base;
         int window_idx;

@@ -4,10 +4,10 @@
 # outputname 输出文件名
 # resultname 程序控制台输出结果重定向文件名
 
-appname='StopWait'
-inputname='input.txt'
-outputname='output.txt'
-resultname='result.txt'
+appname='GBN'
+inputname='./input.txt'
+outputname='./output.txt'
+resultname='./result.txt'
 
 for ((i=1;i<=10;i++))
 do

@@ -60,22 +60,36 @@ bool SRRdtSender::send(const Message &message) {
 
 void SRRdtSender::receive(const Packet &ackPkt) {
     checksum = pUtils->calculateCheckSum(ackPkt);
-    if(checksum == ackPkt.checksum && ackPkt.acknum - window_base < WIN_LENGTH){
-        is_ack[ackPkt.acknum-window_base] = true;
-        // base has acked
-        if(ackPkt.acknum == window_base){
-            int idx = 0;
-            while(is_ack[idx]) idx++;
-            idx++;
-            for(int i=0;i<WIN_LENGTH;i++){
-                window[i] = window[i+idx];
-                is_ack[i] = i < window_idx ? is_ack[i+idx] : false;
+    if(checksum == ackPkt.checksum){
+        if(ackPkt.acknum >= window_base && ackPkt.acknum < window_base + WIN_LENGTH){
+            is_ack[ackPkt.acknum-window_base] = true;
+            pns->stopTimer(SENDER, ackPkt.acknum);
+            // base has acked
+            if(ackPkt.acknum == window_base){
+                pUtils->printPacket("收到base的ACK", ackPkt);
+//            pns->stopTimer(SENDER, ackPkt.acknum);
+                int idx = 0;
+                while(is_ack[idx]) idx++;
+                for(int i=0;i<WIN_LENGTH-idx && i<window_idx;i++){
+                    window[i] = window[i+idx];
+                    is_ack[i] = is_ack[i + idx];
+                }
+                for(int i=WIN_LENGTH-idx;i<window_idx;i++){
+                    is_ack[i] = false;
+                }
+                window_idx -= idx;
+                window_base += idx;
+                waiting_state = false;
+            } else{
+//                pns->stopTimer(SENDER, ackPkt.acknum);//收到不是BASE的ACK，只停止时钟
+            pUtils->printPacket("收到窗口内非base的ACK",ackPkt);
             }
-            window_idx -= idx;
-            window_base += idx;
+        } else{
+//            pns->stopTimer(SENDER,ackPkt.acknum);
+            pUtils->printPacket("收到窗口之前报文的ACK",ackPkt);
         }
     } else{
-
+        pUtils->printPacket("收到ACK包校验和出错",ackPkt);
     }
 }
 
