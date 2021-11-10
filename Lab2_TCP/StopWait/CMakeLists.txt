@@ -26,6 +26,11 @@ add_executable(SR
         src/SRRdtReceiver.cpp
         src/SRRdtSender.cpp)
 
+add_executable(TCP
+        src/TCP.cpp
+        src/TCPRdtSender.cpp
+        src/TCPRdtReceiver.cpp)
+
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 find_library(NETSIM_LIB libnetsim.a ${PROJECT_SOURCE_DIR}/lib)
@@ -39,5 +44,9 @@ target_link_libraries(GBN
         )
 
 target_link_libraries(SR
+        -lnetsim
+        )
+
+target_link_libraries(TCP
         -lnetsim
         )

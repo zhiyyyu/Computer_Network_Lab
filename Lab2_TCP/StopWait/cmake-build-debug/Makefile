@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named TCP
+
+# Build rule for target.
+TCP: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TCP
+.PHONY : TCP
+
+# fast build rule for target.
+TCP/fast:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/build
+.PHONY : TCP/fast
+
+#=============================================================================
 # Target rules for targets named StopWait
 
 # Build rule for target.
@@ -392,6 +405,87 @@ src/StopWaitRdtSender.cpp.s:
 	$(MAKE) -f CMakeFiles/StopWait.dir/build.make CMakeFiles/StopWait.dir/src/StopWaitRdtSender.cpp.s
 .PHONY : src/StopWaitRdtSender.cpp.s
 
+src/TCP.o: src/TCP.cpp.o
+
+.PHONY : src/TCP.o
+
+# target to build an object file
+src/TCP.cpp.o:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCP.cpp.o
+.PHONY : src/TCP.cpp.o
+
+src/TCP.i: src/TCP.cpp.i
+
+.PHONY : src/TCP.i
+
+# target to preprocess a source file
+src/TCP.cpp.i:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCP.cpp.i
+.PHONY : src/TCP.cpp.i
+
+src/TCP.s: src/TCP.cpp.s
+
+.PHONY : src/TCP.s
+
+# target to generate assembly for a file
+src/TCP.cpp.s:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCP.cpp.s
+.PHONY : src/TCP.cpp.s
+
+src/TCPRdtReceiver.o: src/TCPRdtReceiver.cpp.o
+
+.PHONY : src/TCPRdtReceiver.o
+
+# target to build an object file
+src/TCPRdtReceiver.cpp.o:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCPRdtReceiver.cpp.o
+.PHONY : src/TCPRdtReceiver.cpp.o
+
+src/TCPRdtReceiver.i: src/TCPRdtReceiver.cpp.i
+
+.PHONY : src/TCPRdtReceiver.i
+
+# target to preprocess a source file
+src/TCPRdtReceiver.cpp.i:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCPRdtReceiver.cpp.i
+.PHONY : src/TCPRdtReceiver.cpp.i
+
+src/TCPRdtReceiver.s: src/TCPRdtReceiver.cpp.s
+
+.PHONY : src/TCPRdtReceiver.s
+
+# target to generate assembly for a file
+src/TCPRdtReceiver.cpp.s:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCPRdtReceiver.cpp.s
+.PHONY : src/TCPRdtReceiver.cpp.s
+
+src/TCPRdtSender.o: src/TCPRdtSender.cpp.o
+
+.PHONY : src/TCPRdtSender.o
+
+# target to build an object file
+src/TCPRdtSender.cpp.o:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCPRdtSender.cpp.o
+.PHONY : src/TCPRdtSender.cpp.o
+
+src/TCPRdtSender.i: src/TCPRdtSender.cpp.i
+
+.PHONY : src/TCPRdtSender.i
+
+# target to preprocess a source file
+src/TCPRdtSender.cpp.i:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCPRdtSender.cpp.i
+.PHONY : src/TCPRdtSender.cpp.i
+
+src/TCPRdtSender.s: src/TCPRdtSender.cpp.s
+
+.PHONY : src/TCPRdtSender.s
+
+# target to generate assembly for a file
+src/TCPRdtSender.cpp.s:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/src/TCPRdtSender.cpp.s
+.PHONY : src/TCPRdtSender.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -399,6 +493,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... TCP"
 	@echo "... StopWait"
 	@echo "... rebuild_cache"
 	@echo "... SR"
@@ -430,6 +525,15 @@ help:
 	@echo "... src/StopWaitRdtSender.o"
 	@echo "... src/StopWaitRdtSender.i"
 	@echo "... src/StopWaitRdtSender.s"
+	@echo "... src/TCP.o"
+	@echo "... src/TCP.i"
+	@echo "... src/TCP.s"
+	@echo "... src/TCPRdtReceiver.o"
+	@echo "... src/TCPRdtReceiver.i"
+	@echo "... src/TCPRdtReceiver.s"
+	@echo "... src/TCPRdtSender.o"
+	@echo "... src/TCPRdtSender.i"
+	@echo "... src/TCPRdtSender.s"
 .PHONY : help
 
 

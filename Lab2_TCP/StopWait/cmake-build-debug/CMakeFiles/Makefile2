@@ -60,6 +60,43 @@ CMAKE_SOURCE_DIR = /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait
 CMAKE_BINARY_DIR = /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug
 
 #=============================================================================
+# Target rules for target CMakeFiles/TCP.dir
+
+# All Build rule for target.
+CMakeFiles/TCP.dir/all:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/depend
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles --progress-num=13,14,15,16 "Built target TCP"
+.PHONY : CMakeFiles/TCP.dir/all
+
+# Include target in all.
+all: CMakeFiles/TCP.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/TCP.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/TCP.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/narrow/Computer_Network_Lab/Lab2_TCP/StopWait/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/TCP.dir/rule
+
+# Convenience name for target.
+TCP: CMakeFiles/TCP.dir/rule
+
+.PHONY : TCP
+
+# clean rule for target.
+CMakeFiles/TCP.dir/clean:
+	$(MAKE) -f CMakeFiles/TCP.dir/build.make CMakeFiles/TCP.dir/clean
+.PHONY : CMakeFiles/TCP.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/TCP.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/StopWait.dir
 
 # All Build rule for target.
