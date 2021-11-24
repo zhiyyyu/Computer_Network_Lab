@@ -1,6 +1,8 @@
 # Computer_Network_Lab
 HUST Computer Network Lab.
 
+2021/11/22 完工啦.
+
 ### 环境说明
 
 #### Lab1
